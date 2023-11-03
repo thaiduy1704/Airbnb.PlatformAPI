@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230610110856_AddMoreFieldsToImageTable")]
-    partial class AddMoreFieldsToImageTable
+    [Migration("20231103084747_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HightQualityUrl")
+                    b.Property<string>("HighQualityUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LowQualityUrl")
@@ -189,9 +189,14 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Review");
                 });
@@ -529,7 +534,13 @@ namespace Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("ReservationId");
 
+                    b.HasOne("Core.Domain.IdentityEntities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Reservation");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Domain.Entities.Room", b =>

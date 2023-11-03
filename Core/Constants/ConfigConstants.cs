@@ -2,6 +2,6 @@ namespace Core.Constants
 {
    public static class ConfigConstants
    {
-      public const string BlobContainer = "imageairbnb";
+      public const string BlobContainer = "imagestorage";
    }
 }

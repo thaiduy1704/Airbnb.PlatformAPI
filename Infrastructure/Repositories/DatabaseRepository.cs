@@ -98,7 +98,7 @@ namespace Infrastructure.Repositories
       {
          var jsonBlobName = "Data/Json/location.json";
          var sourceContainerName = "data";
-         var destinationContainerName = "imageairbnb";
+         var destinationContainerName = "imagestorage";
 
 
          var sourceContainerClient = _blobServiceClient.GetBlobContainerClient(sourceContainerName);
